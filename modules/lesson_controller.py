@@ -6,7 +6,6 @@ from modules import user_controller
 from modules.lesson import Lesson
 from settings.config import REMIND_WHEN_LEFT_MINUTES
 
-
 conn = sqlite3.connect('db.sqlite', check_same_thread=False)  # open new sqlite connection
 cursor = conn.cursor()  # cursor allows to iterate over database data
 lock = threading.RLock()  # at any moment of time only one thread may request db. All others are waiting
@@ -37,13 +36,6 @@ def get_day_lessons(user_id, day):
         cursor.execute(f"SELECT {columns} FROM group_lessons "
                        "WHERE course=? AND lesson_group=? AND day=?", (user.course, user.course_group, day,))
         data += cursor.fetchall()
-
-        # BS1 have special group for english
-        if user.course == 'BS1':
-            cursor.execute(f"SELECT {columns} FROM group_lessons "
-                           "WHERE subject='English' AND course=? "
-                           "AND lesson_group=? AND day=?", (user.course, user.english_group, day,))
-            data += cursor.fetchall()
 
     return sorted([Lesson(x) for x in data])
 

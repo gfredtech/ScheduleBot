@@ -39,5 +39,5 @@ def cleanup():
 
 if __name__ == '__main__':
     load = ['pizza.jpg', 'test.jpg']
-    upload_timetables(load)
-    # cleanup()
+    # upload_timetables(load)
+    cleanup()
