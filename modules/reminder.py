@@ -6,14 +6,14 @@ import schedule
 from modules import lesson_controller
 
 """
-Reminder module is simply running in background and starts requested function in time
-It is using schedule library
+Reminder module runs in the background for reminding users
+It uses the schedule library
 """
 
 
 def notify_need_remind(call_when_needed):
     """
-    Function add remind times in schedule and set given function to be called on time
+    Adds remind times in schedule and sets given function to be called
 
     :param call_when_needed: function
     """
@@ -23,7 +23,8 @@ def notify_need_remind(call_when_needed):
 
 def reminders_pending():
     """
-    Function is running in background thread and wake schedule to check if reminders time has come
+    Runs in the background thread and
+    wakes schedule to check if there are new reminders
     """
     while 1:
         schedule.run_pending()

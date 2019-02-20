@@ -50,7 +50,7 @@ def get_day_lessons(user_id, day):
 
 def get_current_lesson(user_id):
     """
-    Function returns Lesson for specified user that is going right now
+    Function returns Lesson for user's current lesson
     or None if there is no such lesson
 
     :param user_id: int
@@ -64,7 +64,7 @@ def get_current_lesson(user_id):
 
 def get_next_lesson(user_id):
     """
-    Function returns Lesson for specified user that will start next today
+    Function returns next lesson for specified user
     or None if there is no such lesson
 
     :param user_id: int

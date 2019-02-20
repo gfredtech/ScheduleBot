@@ -10,7 +10,7 @@ lock = threading.RLock()  # at any moment of time only one thread may request db
 
 def register(user_id, alias):
     """
-    Register new user in database
+    Registers new user in database
 
     :param user_id: int
     :param alias: string
@@ -22,7 +22,7 @@ def register(user_id, alias):
 
 def set_course(user_id, course):
     """
-    Set course for specified user
+    Sets course for specified user
 
     :param user_id: int
     :param course: string
@@ -34,25 +34,13 @@ def set_course(user_id, course):
 
 def set_course_group(user_id, course_group):
     """
-    Set course group for specified user
+    Sets course group for specified user
 
     :param user_id: int
     :param course_group: string
     """
     with lock:
         cursor.execute("UPDATE users SET course_group=? WHERE telegram_id=?", (course_group, user_id))
-        conn.commit()
-
-
-def set_english_group(user_id, english_group):
-    """
-    Set english group for specified user
-
-    :param user_id: int
-    :param english_group: string
-    """
-    with lock:
-        cursor.execute("UPDATE users SET english_group=? WHERE telegram_id=?", (english_group, user_id))
         conn.commit()
 
 

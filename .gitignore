@@ -20,3 +20,7 @@ modules/admin_module\.py
 db\.sqlite
 
 venv/
+
+*.jpg
+
+cloud_settings.py

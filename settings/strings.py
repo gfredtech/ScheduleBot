@@ -15,10 +15,8 @@ MESSAGE_HELP = "Schedule bot for GTUC students.\n\n" \
                "Some commands, that might be useful for you:\n" \
                "/configure manage your settings\n" \
                "/reminders turn reminders on/off\n" \
-               "/friend friend's schedule for now\n" \
-               "/help help\n\n" \
-               "We are unable to track all changes in schedule. " 
-MESSAGE_USER_NOT_CONFIGURED = "Sorry. I do not know your groups yet. 😥\n"\
+               "/help help\n\n"
+MESSAGE_USER_NOT_CONFIGURED = "Sorry. I do not know your course yet. 😥\n"\
                               " Please use /configure command to set it up"
 MESSAGE_FULL_WEEK = "google.com"
 MESSAGE_FREE_DAY = "No lessons on this day! Lucky you are!"
@@ -30,7 +28,7 @@ MESSAGE_FRIEND_NOT_FOUND = "Sorry. Your friend is not registered.\nPlease tell h
 
 
 REQUEST_COURSE = "What year are you in?"
-REQUEST_GROUP = "What's your major?"
+REQUEST_GROUP = "What's your course?"
 REQUEST_REMINDERS = f"Would you like to get reminders {REMIND_WHEN_LEFT_MINUTES} minutes "\
                     "before every lecture, tutorial and lab? 🚨"
 REQUEST_ALIAS = "What's your friend's alias?"

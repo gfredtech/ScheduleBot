@@ -54,7 +54,8 @@ class Lesson:
 
     def __lt__(self, other):
         """
-        Compares this lesson with given. Used in lesson sort
+        Compares this lesson with another lesson. Used in sorting lessons
+        according to time
 
         :param other: Lesson
         :return: boolean
@@ -75,8 +76,8 @@ class Lesson:
 
     def get_str_current(self):
         """
-        Returns string, which indicates how many time left until current lesson will be finished.
-        Used when NOW button is pressed and current lesson is going
+        Returns string for the amount of time left for ongoing lesson.
+        Used when NOW button is pressed and lesson is ongoing.
 
         :return: String
         """
@@ -86,8 +87,8 @@ class Lesson:
 
     def get_str_future(self):
         """
-        Returns string, which indicates how many time left until current lesson will be started.
-        Used when NOW button is pressed and current lesson will start next
+        Returns string for amount of time left for future lesson
+        Used when NOW button is pressed and there's an upcoming lesson
 
         :return: String
         """

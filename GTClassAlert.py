@@ -39,7 +39,7 @@ main_markup.add(strings.TEXT_BUTTON_NOW, strings.TEXT_BUTTON_DAY, strings.TEXT_B
 @bot.message_handler(commands=['start', 'help', 'configure', 'reminders', 'friend'])
 def command_handler(message):
     """
-    All commands are processed in this handler
+    All commands are processed by this handler
     """
     log(message)
     # Register user if he is not registered
@@ -66,7 +66,7 @@ def command_handler(message):
 @bot.message_handler(regexp=f"^({'|'.join(strings.TEXT_DAYS_OF_WEEK)})⭐?$")
 def weekday_select_handler(message):
     """
-    Handler for schedule request of specific weekday
+    Handler for viewing schedule for specific day
     """
     log(message)
     if not is_user_configured(message):
@@ -108,6 +108,8 @@ def main_buttons_handler(message):
         markup.add(*buttons)
         bot.send_message(message.chat.id, strings.REQUEST_WEEKDAY, reply_markup=markup)
     elif message.text == strings.TEXT_BUTTON_WEEK:
+        bot.send_photo(message.chat.id, "http://res.cloudinary.com/dhpzvfror/image/upload/c_scale,"
+                                        "w_3000/jgk15fllbwrv24qsc3d5.jpg")
         bot.send_message(message.chat.id, strings.MESSAGE_FULL_WEEK, reply_markup=main_markup)
 
 
@@ -186,8 +188,8 @@ def process_reminders_step(message):
 
 def send_current_schedule(to_chat_id, about_user_id):
     """
-    Send current and next lesson about specified user to given chat
-    Function could be called from /friend command or NOW button press
+    Send current lessons to user
+    should be called from NOW button press
 
     :param to_chat_id: int
     :param about_user_id: int
@@ -200,26 +202,6 @@ def send_current_schedule(to_chat_id, about_user_id):
     bot.send_message(to_chat_id, reply, reply_markup=main_markup)
 
 
-def process_friend_request_step(message):
-    """
-    Send current schedule of user with given alias to requesting person
-    """
-    if message.text is None:
-        unknown_input_handler(message)
-        return
-    # remove tabs, spaces and new line symbols
-    alias = message.text.strip()
-    # remove '@' at beginning
-    if alias[0] == '@':
-        alias = alias[1:]
-    friend_id = user_controller.get_id_by_alias(alias)
-    # check such friend exists
-    if not friend_id or not user_controller.is_configured(friend_id):
-        bot.send_message(message.chat.id, strings.MESSAGE_FRIEND_NOT_FOUND, reply_markup=main_markup)
-        return
-    send_current_schedule(message.chat.id, friend_id)
-
-
 def log(message):
     """
     Write log info about message to file
@@ -229,7 +211,7 @@ def log(message):
 
 def remind_time():
     """
-    Function is called by reminder module in certain amount of minutes before each lesson
+    Function is called by reminder module every 10mins to check for new reminders
     Iterates over users and sends reminders if needed
     """
     # get relevant reminders for current moment
@@ -238,7 +220,7 @@ def remind_time():
         try:
             bot.send_message(user_id, strings.HEADER_REMIND + str(lesson), reply_markup=main_markup)
         except Exception as exception:
-            # 403 Forbidden means user blocked the bot (what a silly!)
+            # 403 Forbidden means user blocked the bot
             if hasattr(exception, 'result') and exception.result.status_code == 403:
                 # delete user from database
                 user_controller.delete(user_id)
