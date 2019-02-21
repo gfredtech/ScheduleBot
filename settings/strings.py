@@ -17,7 +17,7 @@ Some commands, that might be useful for you:
 /start - Start bot
 /help - Display Help
 /configure - Configure your year and course
-/reminder - Set reminders"""
+/reminders - Set reminders on/off"""
 
 MESSAGE_USER_NOT_CONFIGURED = "Sorry. I do not know your course yet. 😥\n" \
                               " Please use /configure command to set it up"
