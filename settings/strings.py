@@ -10,12 +10,15 @@ TEXT_BUTTON_DAY = "DAY⌛"
 TEXT_BUTTON_WEEK = "WEEK 🗓️"
 
 MESSAGE_HI = "Hi there!✋"
-MESSAGE_HELP = "Class Schedule bot for GTUC students.\n\n" \
-               "See your class timetable and get reminders when you have a class:\n" \
-               "Some commands, that might be useful for you:\n" \
-               "/configure manage your settings\n" \
-               "/reminders turn reminders on/off\n" \
-               "/help help\n\n"
+MESSAGE_HELP = """Class Schedule bot for GTUC students.
+See your class timetable and get reminders when you have a class
+Some commands, that might be useful for you:
+
+/start - Start bot
+/help - Display Help
+/configure - Configure your year and course
+/reminder - Set reminders"""
+
 MESSAGE_USER_NOT_CONFIGURED = "Sorry. I do not know your course yet. 😥\n" \
                               " Please use /configure command to set it up"
 MESSAGE_FREE_DAY = "No lessons on this day! You're so lucky :)"
