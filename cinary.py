@@ -46,5 +46,5 @@ def cleanup():
 if __name__ == '__main__':
     load = ['photos/Lvl100.png', 'photos/Lvl200.png', 'photos/Lvl300BCE.png',
             'photos/Lvl300BTE.png', 'photos/Lvl400BCE.png', 'photos/Lvl400BTE.png']
+    cleanup()
     upload_timetables(load)
-    # cleanup()
