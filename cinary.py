@@ -24,6 +24,13 @@ def upload_timetables(loader):
         )
         print(url)
         urls.append(url)
+    write_urls_to_file(urls)
+
+
+def write_urls_to_file(urls):
+    with open('url_dump.txt', 'w') as outfile:
+        for url in urls:
+            outfile.write(url + '\n')
 
 
 def cleanup():
@@ -38,6 +45,7 @@ def cleanup():
 
 
 if __name__ == '__main__':
-    load = ['pizza.jpg', 'test.jpg']
-    # upload_timetables(load)
-    cleanup()
+    load = ['photos/Lvl100.png', 'photos/Lvl200.png', 'photos/Lvl300BCE.png',
+            'photos/Lvl300BTE.png', 'photos/Lvl400BCE.png', 'photos/Lvl400BTE.png']
+    upload_timetables(load)
+    # cleanup()

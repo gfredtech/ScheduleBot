@@ -15,4 +15,4 @@ log
 
 venv/
 
-settings/token.py
+url_dump.txt

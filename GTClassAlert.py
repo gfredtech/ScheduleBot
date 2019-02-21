@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
+import os
+import sys
 from logging.handlers import RotatingFileHandler
 from datetime import datetime
 
@@ -108,9 +110,7 @@ def main_buttons_handler(message):
         markup.add(*buttons)
         bot.send_message(message.chat.id, strings.REQUEST_WEEKDAY, reply_markup=markup)
     elif message.text == strings.TEXT_BUTTON_WEEK:
-        bot.send_photo(message.chat.id, "http://res.cloudinary.com/dhpzvfror/image/upload/c_scale,"
-                                        "w_3000/jgk15fllbwrv24qsc3d5.jpg")
-        bot.send_message(message.chat.id, strings.MESSAGE_FULL_WEEK, reply_markup=main_markup)
+        send_timetable_photo(message.chat.id)
 
 
 @bot.message_handler()
@@ -227,6 +227,30 @@ def remind_time():
             continue
 
 
+def send_timetable_photo(user_id):
+    user = user_controller.get(user_id)
+    with open('url_dump.txt') as f:
+        content = f.readlines()
+    # you may also want to remove whitespace characters like `\n` at the end of each line
+    content = [x.strip() for x in content]
+
+    if user.course == 'Lvl 100':
+        print(100)
+        bot.send_photo(user_id, content[0])
+    elif user.course == 'Lvl 200':
+        bot.send_photo(user_id, content[1])
+    elif user.course == 'Lvl 300':
+        if user.course_group == 'Comp Eng':
+            bot.send_photo(user_id, content[2])
+        else:
+            bot.send_photo(user_id, content[3])
+    else:
+        if user.course_group == 'Comp Eng':
+            bot.send_photo(user_id, content[4])
+        else:
+            bot.send_photo(user_id, content[5])
+
+
 # Tell reminder module which function should be called in remind time
 reminder.notify_need_remind(remind_time)
 
@@ -234,6 +258,13 @@ reminder.notify_need_remind(remind_time)
 bot.enable_save_next_step_handlers()
 bot.load_next_step_handlers()
 
+# execute cinary.py responsible for uploading images
+# to cloudinary using its API
+os.chdir(os.path.join(os.path.dirname(sys.argv[0]), '.'))
+if os.path.exists('cinary.py'):
+    exec(open('cinary.py').read())
+
 # start listening for user`s messages
 # bot.polling(none_stop=True, timeout=50)  # for DEBUG only. Does not restart bot in case of crash
 bot.infinity_polling(none_stop=True, timeout=50)
+
