@@ -72,7 +72,7 @@ class Lesson:
         return f"{self.subject} {self.type}\n"\
                f"{'👨' if self.teacher_gender else '👩'} {self.teacher}\n"\
                f"🕐 {datetime.strftime(self.start, '%H:%M')} 	— {datetime.strftime(self.end, '%H:%M')}\n" \
-               f"🚪 B{self.room}\n"
+               f"🚪{self.room}\n"
 
     def get_str_current(self):
         """
