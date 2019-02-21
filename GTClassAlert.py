@@ -261,8 +261,10 @@ bot.load_next_step_handlers()
 # execute cinary.py responsible for uploading images
 # to cloudinary using its API
 os.chdir(os.path.join(os.path.dirname(sys.argv[0]), '.'))
-if os.path.exists('cinary.py'):
-    exec(open('cinary.py').read())
+if not os.path.exists('url_dump.txt'):
+    print("url_dump.txt does not exist, uploading to cloudinary")
+    if os.path.exists('cinary.py'):
+        exec(open('cinary.py').read())
 
 # start listening for user`s messages
 # bot.polling(none_stop=True, timeout=50)  # for DEBUG only. Does not restart bot in case of crash

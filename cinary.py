@@ -22,7 +22,6 @@ def upload_timetables(loader):
             width=3000,
             crop="scale"
         )
-        print(url)
         urls.append(url)
     write_urls_to_file(urls)
 
